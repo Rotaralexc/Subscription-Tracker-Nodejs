@@ -82,4 +82,15 @@ export const signIn = async (req, res, next) => {
   }
 }
 
-export const signOut = async (req, res, next) => {}
+export const signOut = async (req, res, next) => {
+    try {
+      // Invalidate token on client side by removing it from storage (handled in frontend)
+      // On server side, we can maintain a blacklist of tokens (e.g., in a database or Redis) if needed
+      res.status(200).json({
+        success: true,
+        message: 'User signed out successfully'
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
